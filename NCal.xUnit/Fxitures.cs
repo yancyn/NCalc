@@ -222,7 +222,7 @@ namespace NCalc.xUnit
             };
 
             object result = e.Evaluate();
-            Assert.Equal(1, result);
+            Assert.Equal(-1, result);
         }
 
         [Fact]
