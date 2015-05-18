@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Numerics;
 
 namespace NCalc
 {
@@ -653,6 +654,28 @@ namespace NCalc
                         case TypeCode.Decimal: return (Decimal)a * (Decimal)b;
                     }
                     break;
+            }
+
+            if (a is Complex)
+            {
+                switch (typeCodeB)
+                {
+                    case TypeCode.Boolean: throw new InvalidOperationException("Operator '*' can't be applied to operands of types 'decimal' and 'bool'");
+                    case TypeCode.SByte: return (Complex)a * new Complex((double)b, 0);
+                    case TypeCode.Int16: return (Complex)a * new Complex((double)b, 0);
+                    case TypeCode.UInt16: return (Complex)a * new Complex((double)b, 0);
+                    case TypeCode.Int32: return (Complex)a * new Complex((double)b, 0);
+                    case TypeCode.UInt32: return (Complex)a * new Complex((double)b, 0);
+                    case TypeCode.Int64: return (Complex)a * new Complex((double)b, 0);
+                    case TypeCode.UInt64: return (Complex)a * new Complex((double)b, 0);
+                    case TypeCode.Single: throw new InvalidOperationException("Operator '*' can't be applied to operands of types 'decimal' and 'float'");
+                    case TypeCode.Double: throw new InvalidOperationException("Operator '*' can't be applied to operands of types 'decimal' and 'double'");
+                    case TypeCode.Decimal: return (Complex)a * new Complex((double)b, 0);
+                }
+                if (b is Complex)
+                {
+                    return (Complex)a * (Complex)b;
+                }
             }
 
             return null;
