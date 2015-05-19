@@ -817,6 +817,51 @@ namespace NCalc.xUnit
             e.Parameters["W"] = 1;
             actual = e.Evaluate();
             System.Diagnostics.Debug.WriteLine(actual);
+
+            expression = "Abs((I*W-5*I)*(I*W+5*I)/((I*W+0.7641494766-0.5074794278*I)*(I*W+0.3037239596-1.193205711*I)*(I*W+0.3037239596+1.193205711*I)*(I*W+0.7641494766+0.5074794278*I)))";
+            e = new Expression(expression);
+            e.Parameters["I"] = Complex.ImaginaryOne;
+            e.Parameters["e"] = Math.E;
+            e.Parameters["W"] = 1;
+            actual = e.Evaluate();
+            System.Diagnostics.Debug.WriteLine(actual);
+
+            double x = (double)actual;
+            expression = "(20*Log("+x+",e))/Log(10,e)";
+            e = new Expression(expression);
+            e.Parameters["I"] = Complex.ImaginaryOne;
+            e.Parameters["e"] = Math.E;
+            e.Parameters["W"] = 1;
+            actual = e.Evaluate();
+            System.Diagnostics.Debug.WriteLine(actual);
+        }
+
+        [Fact]
+        public void EvaluateS11Formula2Test()
+        {
+            string expression = "Abs((I*W-5*I)*(I*W+5*I)/((I*W+0.7641494766-0.5074794278*I)*(I*W+0.3037239596-1.193205711*I)*(I*W+0.3037239596+1.193205711*I)*(I*W+0.7641494766+0.5074794278*I)))";
+            var e = new Expression(expression);
+            e.Parameters["I"] = Complex.ImaginaryOne;
+            e.Parameters["e"] = Math.E;
+            e.Parameters["W"] = 1;
+            object actual = e.Evaluate();
+            System.Diagnostics.Debug.WriteLine(actual);
+
+            double x = (double)actual;
+            expression = "(20*Log(("+expression+"),e))/Log(10,e)";
+            e = new Expression(expression);
+            e.Parameters["I"] = Complex.ImaginaryOne;
+            e.Parameters["e"] = Math.E;
+            e.Parameters["W"] = 1;
+            actual = e.Evaluate();
+            System.Diagnostics.Debug.WriteLine(actual);
+        }
+
+        [Fact]
+        public void EvaluateMathLogTest()
+        {
+            double actual = Math.Log(-11.078774238575607, Math.E);
+            System.Diagnostics.Debug.WriteLine(actual);
         }
 
         [Fact]
