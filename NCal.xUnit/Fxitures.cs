@@ -784,6 +784,31 @@ namespace NCalc.xUnit
         }
 
         [Fact]
+        public void AbsoluteExpresionTest()
+        {
+            double expected = 0.15545383598594451;
+            string expression = "(I*W+0.9252542739*I)*(I*W-0.9252542739*I)*(I*W+0.3860143790*I)*(I*W-0.3860143790*I)/((I*W+0.7641494766-0.5074794278*I)*(I*W+0.3037239596-1.193205711*I)*(I*W+0.3037239596+1.193205711*I)*(I*W+0.7641494766+0.5074794278*I))";
+            var e = new Expression(expression);
+            e.Parameters["I"] = 1;
+            e.Parameters["W"] = 1;
+            object result = e.Evaluate();
+            double actual = 0;
+            if (result is Complex)
+            {
+                Complex c = (Complex)result;
+                actual = c.Magnitude;
+            }
+            Assert.Equal(expected, actual);
+
+            expression = "Abs((I*W+0.9252542739*I)*(I*W-0.9252542739*I)*(I*W+0.3860143790*I)*(I*W-0.3860143790*I)/((I*W+0.7641494766-0.5074794278*I)*(I*W+0.3037239596-1.193205711*I)*(I*W+0.3037239596+1.193205711*I)*(I*W+0.7641494766+0.5074794278*I)))";
+            e = new Expression(expression);
+            e.Parameters["I"] = 1;
+            e.Parameters["W"] = 1;
+            result = e.Evaluate();
+            Assert.Equal(expected, result);
+        }
+
+        [Fact]
         public void EvaluateComplexNumberTest()
         {
             string expression = "(I*W-5*I)";
