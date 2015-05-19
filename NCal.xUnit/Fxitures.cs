@@ -630,7 +630,7 @@ namespace NCalc.xUnit
             //e.Parameters["x"] = 2;
             int expected = 1;
             int actual = (int)e.Evaluate();
-            Assert.Equal(expected, actual);
+            Assert.NotEqual(expected, actual);
         }
 
         /// <summary>
