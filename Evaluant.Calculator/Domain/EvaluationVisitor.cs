@@ -288,9 +288,15 @@ namespace NCalc.Domain
                     if (function.Expressions.Length != 1)
                         throw new ArgumentException("Abs() takes exactly 1 argument");
 
-                    Result = Math.Abs(Convert.ToDecimal(
-                        Evaluate(function.Expressions[0]))
-                        );
+                    object result = Evaluate(function.Expressions[0]);
+                    if (result is Complex)
+                    {
+                        // Abs(i) return imaginary value.
+                        Complex output = (Complex)result;
+                        Result = output.Imaginary;
+                    }
+                    else
+                        Result = Math.Abs(Convert.ToDecimal(result));
 
                     break;
 
