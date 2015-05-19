@@ -95,7 +95,7 @@ namespace NCalc
                     }
                     if (b is Complex)
                     {
-                        return new Complex((Int16)a,0) + (Complex)b;
+                        return (Int16)a + (Complex)b;
                     }
                     break;
 
@@ -117,7 +117,7 @@ namespace NCalc
                     }
                     if (b is Complex)
                     {
-                        return new Complex((UInt16)a, 0) + (Complex)b;
+                        return (UInt16)a + (Complex)b;
                     }
                     break;
 
@@ -139,7 +139,7 @@ namespace NCalc
                     }
                     if (b is Complex)
                     {
-                        return new Complex((Int32)a, 0) + (Complex)b;
+                        return (Int32)a + (Complex)b;
                     }
                     break;
 
@@ -161,7 +161,7 @@ namespace NCalc
                     }
                     if (b is Complex)
                     {
-                        return new Complex((UInt32)a, 0) + (Complex)b;
+                        return (UInt32)a + (Complex)b;
                     }
                     break;
 
@@ -183,7 +183,7 @@ namespace NCalc
                     }
                     if (b is Complex)
                     {
-                        return new Complex((Int64)a, 0) + (Complex)b;
+                        return (Int64)a + (Complex)b;
                     }
                     break;
 
@@ -205,7 +205,7 @@ namespace NCalc
                     }
                     if (b is Complex)
                     {
-                        return new Complex((UInt64)a, 0) + (Complex)b;
+                        return (UInt64)a + (Complex)b;
                     }
                     break;
 
@@ -245,7 +245,7 @@ namespace NCalc
                     }
                     if (b is Complex)
                     {
-                        return new Complex((double)a, 0) + (Complex)b;
+                        return (double)a + (Complex)b;
                     }
                     break;
 
@@ -370,7 +370,7 @@ namespace NCalc
                     }
                     if (b is Complex)
                     {
-                        return new Complex((Int16)a,0) - (Complex)b;
+                        return (Int16)a - (Complex)b;
                     }
                     break;
 
@@ -391,7 +391,7 @@ namespace NCalc
                     }
                     if (b is Complex)
                     {
-                        return new Complex((UInt16)a,0) - (Complex)b;
+                        return (UInt16)a - (Complex)b;
                     }
                     break;
 
@@ -412,7 +412,7 @@ namespace NCalc
                     }
                     if (b is Complex)
                     {
-                        return new Complex((Int32)a, 0) - (Complex)b;
+                        return (Int32)a - (Complex)b;
                     }
                     break;
 
@@ -433,7 +433,7 @@ namespace NCalc
                     }
                     if (b is Complex)
                     {
-                        return new Complex((UInt32)a, 0) - (Complex)b;
+                        return (UInt32)a - (Complex)b;
                     }
                     break;
 
@@ -454,7 +454,7 @@ namespace NCalc
                     }
                     if (b is Complex)
                     {
-                        return new Complex((Int64)a, 0) - (Complex)b;
+                        return (Int64)a - (Complex)b;
                     }
                     break;
 
@@ -475,7 +475,7 @@ namespace NCalc
                     }
                     if (b is Complex)
                     {
-                        return new Complex((UInt64)a, 0) - (Complex)b;
+                        return (UInt64)a - (Complex)b;
                     }
                     break;
 
@@ -513,7 +513,7 @@ namespace NCalc
                     }
                     if (b is Complex)
                     {
-                        return new Complex((double)a, 0) - (Complex)b;
+                        return (double)a - (Complex)b;
                     }
                     break;
 
@@ -619,7 +619,7 @@ namespace NCalc
                     }
                     if (b is Complex)
                     {
-                        return new Complex((Int16)a,0) * (Complex)b;
+                        return (Int16)a * (Complex)b;
                     }
                     break;
 
@@ -640,7 +640,7 @@ namespace NCalc
                     }
                     if (b is Complex)
                     {
-                        return new Complex((UInt16)a, 0) * (Complex)b;
+                        return (UInt16)a * (Complex)b;
                     }
                     break;
 
@@ -661,7 +661,7 @@ namespace NCalc
                     }
                     if (b is Complex)
                     {
-                        return new Complex((Int32)a, 0) * (Complex)b;
+                        return (Int32)a * (Complex)b;
                     }
                     break;
 
@@ -682,7 +682,7 @@ namespace NCalc
                     }
                     if (b is Complex)
                     {
-                        return new Complex((UInt32)a, 0) * (Complex)b;
+                        return (UInt32)a * (Complex)b;
                     }
                     break;
 
@@ -703,7 +703,7 @@ namespace NCalc
                     }
                     if (b is Complex)
                     {
-                        return new Complex((Int64)a, 0) * (Complex)b;
+                        return (Int64)a * (Complex)b;
                     }
                     break;
 
@@ -724,7 +724,7 @@ namespace NCalc
                     }
                     if (b is Complex)
                     {
-                        return new Complex((UInt64)a, 0) * (Complex)b;
+                        return (UInt64)a * (Complex)b;
                     }
                     break;
 
@@ -762,7 +762,7 @@ namespace NCalc
                     }
                     if (b is Complex)
                     {
-                        return new Complex((double)a, 0) * (Complex)b;
+                        return (double)a * (Complex)b;
                     }
                     break;
 
@@ -868,7 +868,7 @@ namespace NCalc
                     }
                     if (b is Complex)
                     {
-                        return new Complex((Int16)a,0) / (Complex)b;
+                        return (Int16)a / (Complex)b;
                     }
                     break;
 
@@ -889,7 +889,7 @@ namespace NCalc
                     }
                     if (b is Complex)
                     {
-                        return new Complex((UInt16)a, 0) / (Complex)b;
+                        return (UInt16)a / (Complex)b;
                     }
                     break;
 
@@ -910,7 +910,7 @@ namespace NCalc
                     }
                     if (b is Complex)
                     {
-                        return new Complex((Int32)a, 0) / (Complex)b;
+                        return (Int32)a / (Complex)b;
                     }
                     break;
 
@@ -931,7 +931,7 @@ namespace NCalc
                     }
                     if (b is Complex)
                     {
-                        return new Complex((UInt32)a, 0) / (Complex)b;
+                        return (UInt32)a / (Complex)b;
                     }
                     break;
 
@@ -952,7 +952,7 @@ namespace NCalc
                     }
                     if (b is Complex)
                     {
-                        return new Complex((Int64)a, 0) / (Complex)b;
+                        return (Int64)a / (Complex)b;
                     }
                     break;
 
@@ -973,7 +973,7 @@ namespace NCalc
                     }
                     if (b is Complex)
                     {
-                        return new Complex((UInt64)a, 0) / (Complex)b;
+                        return (UInt64)a / (Complex)b;
                     }
                     break;
 
@@ -1011,7 +1011,7 @@ namespace NCalc
                     }
                     if (b is Complex)
                     {
-                        return new Complex((double)a, 0) / (Complex)b;
+                        return (double)a / (Complex)b;
                     }
                     break;
 
