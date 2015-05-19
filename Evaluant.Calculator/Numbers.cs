@@ -265,7 +265,7 @@ namespace NCalc
 
             return null;
         }
-        public static object Soustract(object a, object b)
+        public static object Subtract(object a, object b)
         {
             a = ConvertIfString(a);
             b = ConvertIfString(b);
