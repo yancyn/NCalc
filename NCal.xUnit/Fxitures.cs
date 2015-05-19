@@ -719,7 +719,7 @@ namespace NCalc.xUnit
         }
 
         [Fact]
-        public void ShouldEvaluateComplexMinus2ParametersTest()
+        public void ShouldEvaluateComplexMinusSecondParametersTest()
         {
             var e = new Expression("5-i");
             e.Parameters["i"] = System.Numerics.Complex.ImaginaryOne;
@@ -788,15 +788,9 @@ namespace NCalc.xUnit
         {
             string expression = "(I*W-5*I)*(I*W+5*I)/((I*W+0.7641494766-0.5074794278*I)*(I*W+0.3037239596-1.193205711*I)*(I*W+0.3037239596+1.193205711*I)*(I*W+0.7641494766+0.5074794278*I))";
             var e = new Expression(expression);
-            e.EvaluateParameter += delegate(string name, ParameterArgs args)
-            {
-                if (name == "I") args.Result = System.Numerics.Complex.ImaginaryOne;
-                if (name == "e") args.Result = Math.E;
-                if (name == "W") args.Result = 1;
-            };
-            //e.Parameters["I"] = Complex.ImaginaryOne;
-            //e.Parameters["e"] = Math.E;
-            //e.Parameters["W"] = 1;
+            e.Parameters["I"] = Complex.ImaginaryOne;
+            e.Parameters["e"] = Math.E;
+            e.Parameters["W"] = 1;
             System.Diagnostics.Debug.WriteLine(e.Evaluate());
         }
 
