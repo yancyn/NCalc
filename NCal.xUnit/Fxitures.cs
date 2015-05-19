@@ -746,5 +746,21 @@ namespace NCalc.xUnit
             Assert.Equal(expected, actual);
         }
 
+        [Fact]
+        public void ShouldEvaluateLog10Test()
+        {
+            double expected = Math.Log10(10);
+            object actual = new Expression("Log10(10)").Evaluate();
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ShouldEvaluateAbsTest()
+        {
+            decimal expected = 5;
+            object actual = new Expression("Abs(-5)").Evaluate();
+            Assert.Equal(expected, actual);
+        }
+
     }
 }
