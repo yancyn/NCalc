@@ -786,12 +786,37 @@ namespace NCalc.xUnit
         [Fact]
         public void EvaluateComplexNumberTest()
         {
-            string expression = "(I*W-5*I)*(I*W+5*I)/((I*W+0.7641494766-0.5074794278*I)*(I*W+0.3037239596-1.193205711*I)*(I*W+0.3037239596+1.193205711*I)*(I*W+0.7641494766+0.5074794278*I))";
+            string expression = "(I*W-5*I)";
             var e = new Expression(expression);
             e.Parameters["I"] = Complex.ImaginaryOne;
             e.Parameters["e"] = Math.E;
             e.Parameters["W"] = 1;
-            System.Diagnostics.Debug.WriteLine(e.Evaluate());
+            object actual = e.Evaluate();
+            System.Diagnostics.Debug.WriteLine(actual);
+
+            expression = "(I*W+5*I)";
+            e = new Expression(expression);
+            e.Parameters["I"] = Complex.ImaginaryOne;
+            e.Parameters["e"] = Math.E;
+            e.Parameters["W"] = 1;
+            actual = e.Evaluate();
+            System.Diagnostics.Debug.WriteLine(actual);
+
+            expression = "((I*W+0.7641494766-0.5074794278*I)*(I*W+0.3037239596-1.193205711*I)*(I*W+0.3037239596+1.193205711*I)*(I*W+0.7641494766+0.5074794278*I))";
+            e = new Expression(expression);
+            e.Parameters["I"] = Complex.ImaginaryOne;
+            e.Parameters["e"] = Math.E;
+            e.Parameters["W"] = 1;
+            actual = e.Evaluate();
+            System.Diagnostics.Debug.WriteLine(actual);
+
+            expression = "(I*W-5*I)*(I*W+5*I)/((I*W+0.7641494766-0.5074794278*I)*(I*W+0.3037239596-1.193205711*I)*(I*W+0.3037239596+1.193205711*I)*(I*W+0.7641494766+0.5074794278*I))";
+            e = new Expression(expression);
+            e.Parameters["I"] = Complex.ImaginaryOne;
+            e.Parameters["e"] = Math.E;
+            e.Parameters["W"] = 1;
+            actual = e.Evaluate();
+            System.Diagnostics.Debug.WriteLine(actual);
         }
 
         [Fact]
