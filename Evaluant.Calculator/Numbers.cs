@@ -340,6 +340,10 @@ namespace NCalc
                         case TypeCode.Double: return (Int16)a - (Double)b;
                         case TypeCode.Decimal: return (Int16)a - (Decimal)b;
                     }
+                    if (b is Complex)
+                    {
+                        return new Complex((Int16)a,0) - (Complex)b;
+                    }
                     break;
 
                 case TypeCode.UInt16:
@@ -356,6 +360,10 @@ namespace NCalc
                         case TypeCode.Single: return (UInt16)a - (Single)b;
                         case TypeCode.Double: return (UInt16)a - (Double)b;
                         case TypeCode.Decimal: return (UInt16)a - (Decimal)b;
+                    }
+                    if (b is Complex)
+                    {
+                        return new Complex((UInt16)a,0) - (Complex)b;
                     }
                     break;
 
@@ -374,6 +382,10 @@ namespace NCalc
                         case TypeCode.Double: return (Int32)a - (Double)b;
                         case TypeCode.Decimal: return (Int32)a - (Decimal)b;
                     }
+                    if (b is Complex)
+                    {
+                        return new Complex((Int32)a, 0) - (Complex)b;
+                    }
                     break;
 
                 case TypeCode.UInt32:
@@ -390,6 +402,10 @@ namespace NCalc
                         case TypeCode.Single: return (UInt32)a - (Single)b;
                         case TypeCode.Double: return (UInt32)a - (Double)b;
                         case TypeCode.Decimal: return (UInt32)a - (Decimal)b;
+                    }
+                    if (b is Complex)
+                    {
+                        return new Complex((UInt32)a, 0) - (Complex)b;
                     }
                     break;
 
@@ -408,6 +424,10 @@ namespace NCalc
                         case TypeCode.Double: return (Int64)a - (Double)b;
                         case TypeCode.Decimal: return (Int64)a - (Decimal)b;
                     }
+                    if (b is Complex)
+                    {
+                        return new Complex((Int64)a, 0) - (Complex)b;
+                    }
                     break;
 
                 case TypeCode.UInt64:
@@ -424,6 +444,10 @@ namespace NCalc
                         case TypeCode.Single: return (UInt64)a - (Single)b;
                         case TypeCode.Double: return (UInt64)a - (Double)b;
                         case TypeCode.Decimal: return (UInt64)a - (Decimal)b;
+                    }
+                    if (b is Complex)
+                    {
+                        return new Complex((UInt64)a, 0) - (Complex)b;
                     }
                     break;
 
@@ -458,6 +482,10 @@ namespace NCalc
                         case TypeCode.Single: return (Double)a - (Single)b;
                         case TypeCode.Double: return (Double)a - (Double)b;
                         case TypeCode.Decimal: throw new InvalidOperationException("Operator '-' can't be applied to operands of types 'double' and 'decimal'");
+                    }
+                    if (b is Complex)
+                    {
+                        return new Complex((double)a, 0) - (Complex)b;
                     }
                     break;
 

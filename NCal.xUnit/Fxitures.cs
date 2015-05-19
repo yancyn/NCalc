@@ -719,6 +719,17 @@ namespace NCalc.xUnit
         }
 
         [Fact]
+        public void ShouldEvaluateComplexMinus2ParametersTest()
+        {
+            var e = new Expression("5-i");
+            e.Parameters["i"] = System.Numerics.Complex.ImaginaryOne;
+
+            Complex expected = new Complex(5, 0) - Complex.ImaginaryOne;
+            object actual = e.Evaluate();
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
         public void ShouldEvaluateComplexMultiplicationParametersTest()
         {
             var e = new Expression("i*i");
@@ -760,6 +771,44 @@ namespace NCalc.xUnit
             decimal expected = 5;
             object actual = new Expression("Abs(-5)").Evaluate();
             Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void EvalueAbsComplexParametersTest()
+        {
+            var e = new Expression("Abs(i*i)");
+            e.Parameters["i"] = Complex.ImaginaryOne;
+            double expected = 0;
+            object actual = e.Evaluate();
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void EvaluateComplexNumberTest()
+        {
+            string expression = "(I*W-5*I)*(I*W+5*I)/((I*W+0.7641494766-0.5074794278*I)*(I*W+0.3037239596-1.193205711*I)*(I*W+0.3037239596+1.193205711*I)*(I*W+0.7641494766+0.5074794278*I))";
+            var e = new Expression(expression);
+            e.EvaluateParameter += delegate(string name, ParameterArgs args)
+            {
+                if (name == "I") args.Result = System.Numerics.Complex.ImaginaryOne;
+                if (name == "e") args.Result = Math.E;
+                if (name == "W") args.Result = 1;
+            };
+            //e.Parameters["I"] = Complex.ImaginaryOne;
+            //e.Parameters["e"] = Math.E;
+            //e.Parameters["W"] = 1;
+            System.Diagnostics.Debug.WriteLine(e.Evaluate());
+        }
+
+        [Fact]
+        public void EvaluateS11FormulaTest()
+        {
+            string expression = "(20*Log(0.5076995204*Abs(),e))/Log(10,e)";
+            var e = new Expression(expression);
+            e.Parameters["I"] = Complex.ImaginaryOne;
+            e.Parameters["e"] = Math.E;
+            e.Parameters["W"] = 1;
+            System.Diagnostics.Debug.WriteLine(e.Evaluate());
         }
 
     }
