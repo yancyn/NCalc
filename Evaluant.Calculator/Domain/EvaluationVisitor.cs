@@ -35,7 +35,7 @@ namespace NCalc.Domain
 
         private static Type[] CommonTypes = new[] { typeof(Int64), typeof(Double), typeof(Boolean), typeof(String), typeof(Decimal) };
 
-    /// <summary>
+        /// <summary>
         /// Gets the the most precise type.
         /// </summary>
         /// <param name="a">Type a.</param>
@@ -132,7 +132,11 @@ namespace NCalc.Domain
                 case BinaryExpressionType.Div:
                     if (IsComplex(left()) || IsComplex(right()))
                     {
-                        Result = Numbers.Divide((Complex)left(), (Complex)right());
+                        Object a = left();
+                        if (IsComplex(left())) a = (Complex)left();
+                        Object b = right();
+                        if (IsComplex(right())) b = (Complex)right();
+                        Result = Numbers.Divide(a, b);
                     }
                     else
                     {
@@ -258,15 +262,15 @@ namespace NCalc.Domain
             // Don't call parameters right now, instead let the function do it as needed.
             // Some parameters shouldn't be called, for instance, in a if(), the "not" value might be a division by zero
             // Evaluating every value could produce unexpected behaviour
-            for (int i = 0; i < function.Expressions.Length; i++ )
+            for (int i = 0; i < function.Expressions.Length; i++)
             {
-                args.Parameters[i] =  new Expression(function.Expressions[i], _options);
+                args.Parameters[i] = new Expression(function.Expressions[i], _options);
                 args.Parameters[i].EvaluateFunction += EvaluateFunction;
                 args.Parameters[i].EvaluateParameter += EvaluateParameter;
 
                 // Assign the parameters of the Expression to the arguments so that custom Functions and Parameters can use them
                 args.Parameters[i].Parameters = Parameters;
-            }            
+            }
 
             // Calls external implementation
             OnEvaluateFunction(IgnoreCase ? function.Identifier.Name.ToLower() : function.Identifier.Name, args);
@@ -423,7 +427,19 @@ namespace NCalc.Domain
                     if (function.Expressions.Length != 2)
                         throw new ArgumentException("Log() takes exactly 2 arguments");
 
-                    Result = Math.Log(Convert.ToDouble(Evaluate(function.Expressions[0])), Convert.ToDouble(Evaluate(function.Expressions[1])));
+                    object result0 = Evaluate(function.Expressions[0]);
+                    object result1 = Evaluate(function.Expressions[1]);
+                    if (result0 is Complex)
+                    {
+                        Complex c = (Complex)result0;
+                        result0 = c.Imaginary;
+                    }
+                    if (result1 is Complex)
+                    {
+                        Complex c = (Complex)result1;
+                        result1 = c.Imaginary;
+                    }
+                    Result = Math.Log(Convert.ToDouble(result0), Convert.ToDouble(result1));
 
                     break;
 
@@ -437,7 +453,13 @@ namespace NCalc.Domain
                     if (function.Expressions.Length != 1)
                         throw new ArgumentException("Log10() takes exactly 1 argument");
 
-                    Result = Math.Log10(Convert.ToDouble(Evaluate(function.Expressions[0])));
+                    object log10 = Evaluate(function.Expressions[0]);
+                    if (log10 is Complex)
+                    {
+                        Complex c = (Complex)log10;
+                        log10 = c.Imaginary;
+                    }
+                    Result = Math.Log10(Convert.ToDouble(log10));
 
                     break;
 
@@ -542,7 +564,7 @@ namespace NCalc.Domain
                     break;
 
                 #endregion
-                
+
                 #region Max
                 case "max":
 
@@ -619,7 +641,7 @@ namespace NCalc.Domain
                 #endregion
 
                 default:
-                    throw new ArgumentException("Function not found", 
+                    throw new ArgumentException("Function not found",
                         function.Identifier.Name);
             }
         }
