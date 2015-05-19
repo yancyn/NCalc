@@ -621,6 +621,19 @@ namespace NCalc.xUnit
         }
 
         /// <summary>
+        /// Algebra calculation fail.
+        /// </summary>
+        [Fact]
+        public void AlgebraExpressionTest()
+        {
+            var e = new Expression("x/x");
+            //e.Parameters["x"] = 2;
+            int expected = 1;
+            int actual = (int)e.Evaluate();
+            Assert.Equal(expected, actual);
+        }
+
+        /// <summary>
         /// If variable name longer than 1 character need to define in delegate.
         /// </summary>
         [Fact]
