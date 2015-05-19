@@ -297,7 +297,7 @@ namespace NCalc.Domain
                     {
                         // Abs(i) return imaginary value.
                         Complex output = (Complex)result;
-                        Result = output.Imaginary;
+                        Result = output.Magnitude;
                     }
                     else
                         Result = Math.Abs(Convert.ToDecimal(result));
@@ -432,12 +432,12 @@ namespace NCalc.Domain
                     if (result0 is Complex)
                     {
                         Complex c = (Complex)result0;
-                        result0 = c.Imaginary;
+                        result0 = c.Magnitude;
                     }
                     if (result1 is Complex)
                     {
                         Complex c = (Complex)result1;
-                        result1 = c.Imaginary;
+                        result1 = c.Magnitude;
                     }
                     Result = Math.Log(Convert.ToDouble(result0), Convert.ToDouble(result1));
 
@@ -457,7 +457,7 @@ namespace NCalc.Domain
                     if (log10 is Complex)
                     {
                         Complex c = (Complex)log10;
-                        log10 = c.Imaginary;
+                        log10 = c.Magnitude;
                     }
                     Result = Math.Log10(Convert.ToDouble(log10));
 
