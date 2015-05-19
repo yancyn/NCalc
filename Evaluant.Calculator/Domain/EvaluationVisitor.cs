@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 
 namespace NCalc.Domain
 {
@@ -82,6 +83,16 @@ namespace NCalc.Domain
             return typeCode == TypeCode.Decimal || typeCode == TypeCode.Double || typeCode == TypeCode.Single;
         }
 
+        /// <summary>
+        /// Return true if it is a complex number.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        private static bool IsComplex(object value)
+        {
+            return (value is System.Numerics.Complex) ? true : false;
+        }
+
         public override void Visit(BinaryExpression expression)
         {
             // simulate Lazy<Func<>> behavior for late evaluation
@@ -119,9 +130,16 @@ namespace NCalc.Domain
                     break;
 
                 case BinaryExpressionType.Div:
-                    Result = IsReal(left()) || IsReal(right())
-                                 ? Numbers.Divide(left(), right())
-                                 : Numbers.Divide(Convert.ToDouble(left()), right());
+                    if (IsComplex(left()) || IsComplex(right()))
+                    {
+                        Result = Numbers.Divide((Complex)left(), (Complex)right());
+                    }
+                    else
+                    {
+                        Result = IsReal(left()) || IsReal(right())
+                                     ? Numbers.Divide(left(), right())
+                                     : Numbers.Divide(Convert.ToDouble(left()), right());
+                    }
                     break;
 
                 case BinaryExpressionType.Equal:

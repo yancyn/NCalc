@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Threading;
 using System.Collections;
 
@@ -677,6 +678,34 @@ namespace NCalc.xUnit
         }
 
         [Fact]
+        public void ShouldEvaluateComplexPlusParametersTest()
+        {
+            var e = new Expression("i+i");
+            e.EvaluateParameter += delegate(string name, ParameterArgs args)
+            {
+                if (name == "i") args.Result = System.Numerics.Complex.ImaginaryOne;
+            };
+
+            Complex expected = Complex.ImaginaryOne + Complex.ImaginaryOne;
+            object actual = e.Evaluate();
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ShouldEvaluateComplexMinusParametersTest()
+        {
+            var e = new Expression("i-i");
+            e.EvaluateParameter += delegate(string name, ParameterArgs args)
+            {
+                if (name == "i") args.Result = System.Numerics.Complex.ImaginaryOne;
+            };
+
+            Complex expected = new Complex(0,0);
+            object actual = e.Evaluate();
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
         public void ShouldEvaluateComplexMultiplicationParametersTest()
         {
             var e = new Expression("i*i");
@@ -685,8 +714,23 @@ namespace NCalc.xUnit
                 if (name == "i") args.Result = System.Numerics.Complex.ImaginaryOne;
             };
 
-            object result = e.Evaluate();
-            Assert.Equal(new System.Numerics.Complex(-1, 0), result);
+            Complex expected = new Complex(-1, 0);
+            object actual = e.Evaluate();
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ShouldEvaluateComplexDivideParametersTest()
+        {
+            var e = new Expression("i/i");
+            e.EvaluateParameter += delegate(string name, ParameterArgs args)
+            {
+                if (name == "i") args.Result = System.Numerics.Complex.ImaginaryOne;
+            };
+
+            Complex expected = new Complex(1, 0);
+            object actual = e.Evaluate();
+            Assert.Equal(expected, actual);
         }
 
     }
