@@ -7,7 +7,7 @@ namespace NCalc
     {
         private static object ConvertIfString(object s)
         {
-            if (s is String|| s is char)
+            if (s is String || s is char)
             {
                 return Decimal.Parse(s.ToString());
             }
@@ -28,9 +28,9 @@ namespace NCalc
                 case TypeCode.Boolean:
                     switch (typeCodeB)
                     {
-                        case TypeCode.Boolean: throw new InvalidOperationException("Operator '+' can't be applied to operands of types 'bool' and 'bool'"); 
-                        case TypeCode.Byte: throw new InvalidOperationException("Operator '+' can't be applied to operands of types 'bool' and 'byte'"); 
-                        case TypeCode.SByte: throw new InvalidOperationException("Operator '+' can't be applied to operands of types 'bool' and 'byte'"); 
+                        case TypeCode.Boolean: throw new InvalidOperationException("Operator '+' can't be applied to operands of types 'bool' and 'bool'");
+                        case TypeCode.Byte: throw new InvalidOperationException("Operator '+' can't be applied to operands of types 'bool' and 'byte'");
+                        case TypeCode.SByte: throw new InvalidOperationException("Operator '+' can't be applied to operands of types 'bool' and 'byte'");
                         case TypeCode.Int16: throw new InvalidOperationException("Operator '+' can't be applied to operands of types 'bool' and 'byte'");
                         case TypeCode.UInt16: throw new InvalidOperationException("Operator '+' can't be applied to operands of types 'bool' and 'byte'");
                         case TypeCode.Int32: throw new InvalidOperationException("Operator '+' can't be applied to operands of types 'bool' and 'byte'");
@@ -240,9 +240,31 @@ namespace NCalc
                     break;
             }
 
+            if (a is Complex)
+            {
+                switch (typeCodeB)
+                {
+                    case TypeCode.Boolean: throw new InvalidOperationException("Operator '+' can't be applied to operands of types 'complex' and 'bool'");
+                    case TypeCode.Byte: return (Complex)a + (Byte)b;
+                    case TypeCode.SByte: return (Complex)a + (SByte)b;
+                    case TypeCode.Int16: return (Complex)a + (Int16)b;
+                    case TypeCode.UInt16: return (Complex)a + (UInt16)b;
+                    case TypeCode.Int32: return (Complex)a + (Int32)b;
+                    case TypeCode.UInt32: return (Complex)a + (UInt32)b;
+                    case TypeCode.Int64: return (Complex)a + (Int64)b;
+                    case TypeCode.UInt64: return (Complex)a + (UInt64)b;
+                    case TypeCode.Single: return (Complex)a + (Single)b;
+                    case TypeCode.Double: return (Complex)a + (Double)b;
+                    case TypeCode.Decimal: throw new InvalidOperationException("Operator '+' can't be applied to operands of types 'complex' and 'decimal'");
+                }
+                if (b is Complex)
+                {
+                    return (Complex)a + (Complex)b;
+                }
+            }
+
             return null;
         }
-
         public static object Soustract(object a, object b)
         {
             a = ConvertIfString(a);
@@ -457,6 +479,28 @@ namespace NCalc
                     break;
             }
 
+            if (a is Complex)
+            {
+                switch (typeCodeB)
+                {
+                    case TypeCode.Boolean: throw new InvalidOperationException("Operator '-' can't be applied to operands of types 'double' and 'bool'");
+                    case TypeCode.SByte: return (Complex)a - (SByte)b;
+                    case TypeCode.Int16: return (Complex)a - (Int16)b;
+                    case TypeCode.UInt16: return (Complex)a - (UInt16)b;
+                    case TypeCode.Int32: return (Complex)a - (Int32)b;
+                    case TypeCode.UInt32: return (Complex)a - (UInt32)b;
+                    case TypeCode.Int64: return (Complex)a - (Int64)b;
+                    case TypeCode.UInt64: return (Complex)a - (UInt64)b;
+                    case TypeCode.Single: return (Complex)a - (Single)b;
+                    case TypeCode.Double: return (Complex)a - (Double)b;
+                    case TypeCode.Decimal: throw new InvalidOperationException("Operator '-' can't be applied to operands of types 'complex' and 'decimal'");
+                }
+                if (b is Complex)
+                {
+                    return (Complex)a - (Complex)b;
+                }
+            }
+
             return null;
         }
         public static object Multiply(object a, object b)
@@ -661,16 +705,16 @@ namespace NCalc
                 switch (typeCodeB)
                 {
                     case TypeCode.Boolean: throw new InvalidOperationException("Operator '*' can't be applied to operands of types 'decimal' and 'bool'");
-                    case TypeCode.SByte: return (Complex)a * new Complex((double)b, 0);
-                    case TypeCode.Int16: return (Complex)a * new Complex((double)b, 0);
-                    case TypeCode.UInt16: return (Complex)a * new Complex((double)b, 0);
-                    case TypeCode.Int32: return (Complex)a * new Complex((double)b, 0);
-                    case TypeCode.UInt32: return (Complex)a * new Complex((double)b, 0);
-                    case TypeCode.Int64: return (Complex)a * new Complex((double)b, 0);
-                    case TypeCode.UInt64: return (Complex)a * new Complex((double)b, 0);
-                    case TypeCode.Single: throw new InvalidOperationException("Operator '*' can't be applied to operands of types 'decimal' and 'float'");
-                    case TypeCode.Double: throw new InvalidOperationException("Operator '*' can't be applied to operands of types 'decimal' and 'double'");
-                    case TypeCode.Decimal: return (Complex)a * new Complex((double)b, 0);
+                    case TypeCode.SByte: return (Complex)a * (SByte)b;
+                    case TypeCode.Int16: return (Complex)a * (Int16)b;
+                    case TypeCode.UInt16: return (Complex)a * (UInt16)b;
+                    case TypeCode.Int32: return (Complex)a * (Int32)b;
+                    case TypeCode.UInt32: return (Complex)a * (UInt32)b;
+                    case TypeCode.Int64: return (Complex)a * (Int64)b;
+                    case TypeCode.UInt64: return (Complex)a * (UInt64)b;
+                    case TypeCode.Single: return (Complex)a * (Single)b;
+                    case TypeCode.Double: return (Complex)a * (Double)b;
+                    case TypeCode.Decimal: throw new InvalidOperationException("Operator '*' can't be applied to operands of types 'complex' and 'decimal'");
                 }
                 if (b is Complex)
                 {
@@ -875,6 +919,28 @@ namespace NCalc
                         case TypeCode.Decimal: return (Decimal)a / (Decimal)b;
                     }
                     break;
+            }
+
+            if (a is Complex)
+            {
+                switch (typeCodeB)
+                {
+                    case TypeCode.Boolean: throw new InvalidOperationException("Operator '/' can't be applied to operands of types 'decimal' and 'bool'");
+                    case TypeCode.SByte: return (Complex)a / (SByte)b;
+                    case TypeCode.Int16: return (Complex)a / (Int16)b;
+                    case TypeCode.UInt16: return (Complex)a / (UInt16)b;
+                    case TypeCode.Int32: return (Complex)a / (Int32)b;
+                    case TypeCode.UInt32: return (Complex)a / (UInt32)b;
+                    case TypeCode.Int64: return (Complex)a / (Int64)b;
+                    case TypeCode.UInt64: return (Complex)a / (UInt64)b;
+                    case TypeCode.Single: return (Complex)a / (Single)b;
+                    case TypeCode.Double: return (Complex)a / (Double)b;
+                    case TypeCode.Decimal: throw new InvalidOperationException("Operator '/' can't be applied to operands of types 'complex' and 'decimal'");
+                }
+                if (b is Complex)
+                {
+                    return (Complex)a / (Complex)b;
+                }
             }
 
             return null;
