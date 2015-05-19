@@ -1,4 +1,5 @@
 using System;
+using System.Numerics;
 
 namespace NCalc.Domain
 {
@@ -80,6 +81,12 @@ namespace NCalc.Domain
             Type = ValueType.Boolean;
         }
 
+        public ValueExpression(Complex value)
+        {
+            Value = value;
+            Type = ValueType.Complex;
+        }
+
         public object Value { get; set; }
         public ValueType Type { get; set; }
 
@@ -95,6 +102,7 @@ namespace NCalc.Domain
 		String,
 		DateTime,
 		Float,
-		Boolean
+		Boolean,
+        Complex,
 	}
 }
