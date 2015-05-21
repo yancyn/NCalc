@@ -300,7 +300,9 @@ namespace NCalc.Domain
                         Result = output.Magnitude;
                     }
                     else
+                    {
                         Result = Math.Abs(Convert.ToDecimal(result));
+                    }
 
                     break;
 
@@ -432,12 +434,12 @@ namespace NCalc.Domain
                     if (result0 is Complex)
                     {
                         Complex c = (Complex)result0;
-                        result0 = c.Magnitude;
+                        result0 = c.Real;
                     }
                     if (result1 is Complex)
                     {
                         Complex c = (Complex)result1;
-                        result1 = c.Magnitude;
+                        result1 = c.Real;
                     }
                     Result = Math.Log(Convert.ToDouble(result0), Convert.ToDouble(result1));
 
@@ -457,7 +459,7 @@ namespace NCalc.Domain
                     if (log10 is Complex)
                     {
                         Complex c = (Complex)log10;
-                        log10 = c.Magnitude;
+                        log10 = c.Real;
                     }
                     Result = Math.Log10(Convert.ToDouble(log10));
 
