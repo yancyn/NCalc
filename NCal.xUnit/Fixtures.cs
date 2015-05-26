@@ -900,5 +900,15 @@ namespace NCalc.xUnit
             System.Diagnostics.Debug.WriteLine(e.Evaluate());
         }
 
+        // Fail. NCalc cannot solve algebra equation in symbolic notation
+        [Fact]
+        public void SolveEquationTest()
+        {
+            string equation = "(v1-v0)*s/(1+s^2)=0";
+            Expression expression = new Expression(equation);
+            object result = expression.Evaluate();
+            System.Diagnostics.Debug.WriteLine(result);
+        }
+
     }
 }
