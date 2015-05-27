@@ -900,6 +900,30 @@ namespace NCalc.xUnit
             System.Diagnostics.Debug.WriteLine(e.Evaluate());
         }
 
+        // TODO: Fail to evaluate exponential for complex number
+        [Fact]
+        public void S11FormulaExpressionTest()
+        {
+            //string expression0 = "((1)-(-1)+(-(1 + (2*Pi*I*f)^2)/(2*Pi*I*f))/(50)-(0)*(50))/((1)+(-1)+(-(1 + (2*Pi*I*f)^2)/(2*Pi*I*f))/(50)+(0)*(50))";
+            string expression0 = "Abs(((1)-(-1)+(-(1 + (2*Pi*I*f)*(2*Pi*I*f))/(2*Pi*I*f))/(50)-(0)*(50))/((1)+(-1)+(-(1 + (2*Pi*I*f)*(2*Pi*I*f))/(2*Pi*I*f))/(50)+(0)*(50)))";
+            var e = new Expression(expression0);
+            e.EvaluateParameter += e_EvaluateParameter;
+            e.Parameters["f"] = 1;
+
+            double expected = -24.276;
+            object actual = e.Evaluate();
+            actual = 20 * Math.Log10((double)actual);
+            Assert.Equal(expected, actual);
+        }
+        void e_EvaluateParameter(string name, ParameterArgs args)
+        {
+            if (name == "Z0") args.Result = 50;
+            //if (name == "s") args.Result = (2 * Math.PI * System.Numerics.Complex.ImaginaryOne).Magnitude;
+            if (name == "I") args.Result = System.Numerics.Complex.ImaginaryOne;
+            if (name == "e") args.Result = Math.E;
+            if (name == "Pi") args.Result = Math.PI;
+        }
+
         // Fail. NCalc cannot solve algebra equation in symbolic notation
         [Fact]
         public void SolveEquationTest()
