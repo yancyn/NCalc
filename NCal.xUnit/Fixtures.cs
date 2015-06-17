@@ -859,6 +859,12 @@ namespace NCalc.xUnit
             e.Parameters["W"] = 1;
             actual = e.Evaluate();
             System.Diagnostics.Debug.WriteLine(actual);
+
+            expression = "I*I";
+            e = new Expression(expression);
+            e.Parameters["I"] = Complex.ImaginaryOne;
+            actual = e.Evaluate();
+            System.Diagnostics.Debug.WriteLine(actual);
         }
 
         [Fact]
@@ -915,13 +921,14 @@ namespace NCalc.xUnit
             actual = 20 * Math.Log10((double)actual);
             Assert.Equal(expected, actual);
         }
-        void e_EvaluateParameter(string name, ParameterArgs args)
+        private void e_EvaluateParameter(string name, ParameterArgs args)
         {
-            if (name == "Z0") args.Result = 50;
-            //if (name == "s") args.Result = (2 * Math.PI * System.Numerics.Complex.ImaginaryOne).Magnitude;
-            if (name == "I") args.Result = System.Numerics.Complex.ImaginaryOne;
-            if (name == "e") args.Result = Math.E;
             if (name == "Pi") args.Result = Math.PI;
+            if (name == "Z0") args.Result = 50;
+            if (name == "e") args.Result = Math.E;
+            if (name == "I") args.Result = Complex.ImaginaryOne;
+            if (name == "i") args.Result = Complex.ImaginaryOne;
+            if (name == "j") args.Result = Complex.ImaginaryOne;
         }
 
         // Fail. NCalc cannot solve algebra equation in symbolic notation
@@ -932,6 +939,29 @@ namespace NCalc.xUnit
             Expression expression = new Expression(equation);
             object result = expression.Evaluate();
             System.Diagnostics.Debug.WriteLine(result);
+        }
+
+        [Fact]
+        public void EvaluateVariableABCDTest()
+        {
+            Complex expected = 1 / (-163317787283838 * Complex.ImaginaryOne);
+
+            string expression = "v0/(0*j*0 + 1*0 + -163317787283838*j*v0 + -163317787283838*j*0)";
+            var e = new Expression(expression);
+            e.EvaluateParameter += e_EvaluateParameter;
+            e.Parameters["f"] = 20;
+            e.Parameters["v0"] = 1;
+
+            Complex actual = Complex.Zero;
+            object result = e.Evaluate();
+            if (result is Complex)
+                actual = (Complex)result;
+            else
+                actual = new Complex(Convert.ToDouble(result), 0);
+
+            System.Diagnostics.Debug.WriteLine(actual);
+            //almost equal Assert.Equal(expected, actual);
+
         }
 
     }

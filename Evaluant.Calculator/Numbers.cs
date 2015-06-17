@@ -584,6 +584,10 @@ namespace NCalc
                         case TypeCode.Double: return (Byte)a * (Double)b;
                         case TypeCode.Decimal: return (Byte)a * (Decimal)b;
                     }
+                    if (b is Complex)
+                    {
+                        return (Byte)a * (Complex)b;
+                    }
                     break;
                 case TypeCode.SByte:
                     switch (typeCodeB)
@@ -599,6 +603,10 @@ namespace NCalc
                         case TypeCode.Single: return (SByte)a * (Single)b;
                         case TypeCode.Double: return (SByte)a * (Double)b;
                         case TypeCode.Decimal: return (SByte)a * (Decimal)b;
+                    }
+                    if (b is Complex)
+                    {
+                        return (SByte)a * (Complex)b;
                     }
                     break;
 
@@ -743,6 +751,10 @@ namespace NCalc
                         case TypeCode.Double: return (Single)a * (Double)b;
                         case TypeCode.Decimal: throw new InvalidOperationException("Operator '*' can't be applied to operands of types 'float' and 'decimal'");
                     }
+                    if (b is Complex)
+                    {
+                        return (Single)a * (Complex)b;
+                    }
                     break;
 
                 case TypeCode.Double:
@@ -780,6 +792,11 @@ namespace NCalc
                         case TypeCode.Single: throw new InvalidOperationException("Operator '*' can't be applied to operands of types 'decimal' and 'float'");
                         case TypeCode.Double: throw new InvalidOperationException("Operator '*' can't be applied to operands of types 'decimal' and 'double'");
                         case TypeCode.Decimal: return (Decimal)a * (Decimal)b;
+                    }
+                    if (b is Complex)
+                    {
+                        // TODO: Need to verify when a is decimal * complex
+                        return (double)a * (Complex)b;
                     }
                     break;
             }
