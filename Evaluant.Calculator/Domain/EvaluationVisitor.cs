@@ -130,11 +130,20 @@ namespace NCalc.Domain
                     break;
 
                 case BinaryExpressionType.Div:
-                    Object a = left();
-                    if (IsComplex(left())) a = (Complex)left();
-                    Object b = right();
-                    if (IsComplex(right())) b = (Complex)right();
-                    Result = Numbers.Divide(a, b);
+                    if (IsComplex(left()) || IsComplex(right()))
+                    {
+                        Object a = left();
+                        if (IsComplex(left())) a = (Complex)left();
+                        Object b = right();
+                        if (IsComplex(right())) b = (Complex)right();
+                        Result = Numbers.Divide(a, b);
+                    }
+                    else
+                    {
+                        Result = IsReal(left()) || IsReal(right())
+                                     ? Numbers.Divide(left(), right())
+                                     : Numbers.Divide(Convert.ToDouble(left()), right());
+                    }
                     break;
 
                 case BinaryExpressionType.Equal:
@@ -202,28 +211,7 @@ namespace NCalc.Domain
 
 
                 case BinaryExpressionType.BitwiseXOr:
-                    int l = 0;
-                    int r = 0;
-                    Object x = left();
-                    Object y = right();
-                    if (x is Complex)
-                    {
-                        Complex c = (Complex)x;
-                        l = Convert.ToInt32(c.Magnitude);
-                    }
-                    else
-                        l = Convert.ToInt32(x);
-
-                    if (y is Complex)
-                    {
-                        Complex c = (Complex)y;
-                        r = Convert.ToInt32(c.Magnitude);
-                    }
-                    else
-                        r = Convert.ToInt32(x);
-                    //Result = Convert.ToUInt16(left()) ^ Convert.ToUInt16(right());
-                    //Result = Convert.ToInt32(left()) ^ Convert.ToInt32(right());
-                    Result = l ^ r;
+                    Result = Convert.ToUInt16(left()) ^ Convert.ToUInt16(right());
                     break;
 
 
